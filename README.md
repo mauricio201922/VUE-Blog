@@ -2,7 +2,13 @@
 
 ## Project setup
 ```
-npm install
+npm install vue
+npm install @vue/cli
+```
+
+## Project create project
+```
+vue create "name-project"
 ```
 
 ### Compiles and hot-reloads for development
