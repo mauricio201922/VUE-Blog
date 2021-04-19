@@ -27,7 +27,48 @@
 
     <!-- Proximo: Fundo preto e imagens -->
 
+    <main class="main-home">
+        <div class="Titulo">
+            <h1>Welcome Blog</h1>
+            <p>este blog desenvolvido com intuito de ajudar a melhorar minhas experiências em Vue</p>
+        </div>
+        <nav class="all-image">
+            <ul>
+                <!-- Linha de imagens 1 -->
+                <li class="line-one">
+                    <div class="img-one">
+                        <img src="../assets/Mediterranean-Villa.jpg">
+                        <h3>Mediterranean Villa</h3>
+                    </div>
+                    <div class="img-two">
+                        <img src="../assets/modern-building.jpg">
+                        <h3>Modern Building</h3>
+                    </div>
+                    <div class="img-three">
+                        <img src="../assets/red-house.jpg">
+                        <h3>Red House</h3>
+                    </div>
+                </li>
 
+                <!-- Linha de imagens 2 -->
+                <li class="line-two">
+                    <div class="img-one">
+                        <img src="../assets/modern-house.jpg">
+                        <h3>Modern House</h3>
+                    </div>
+                    <div class="img-two">
+                        <img src="../assets/white-house.jpg">
+                        <h3>White House</h3>
+                    </div>
+                    <div class="img-three">
+                        <img src="../assets/art-center.jpg">
+                        <h3>Art Center</h3>
+                    </div>
+                </li>
+                
+            </ul>
+        </nav>
+    </main>
     
     
   </div>
@@ -35,7 +76,6 @@
 
 <script>
 export default {
-  name: 'Blog',
   /*props: {
     msg: String,
   }*/
@@ -47,6 +87,10 @@ export default {
     *{
         margin: 0;
         padding: 0;
+    }
+
+    .hello{
+        background-color: rgb(172, 172, 172);
     }
 
     .menu-blog{
@@ -110,5 +154,77 @@ export default {
 
     /* Main: Tela principal */
 
+
+    .main-home{
+        background-color: black;
+        height: 40vw;
+    }
+
+    /* Titulo do main */
+    .Titulo{
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        margin: 0 0 0 3vw;
+        padding: 5vw;
+    }
+
+    .Titulo h1{
+        margin: 15px;
+        padding: auto;
+    }
+
+    .Titulo p{
+        margin: 2px 5px 0 5px;
+        padding: 3px;
+        max-width: 100vw;
+        min-width: 25;
+        width: 50vw;
+        min-height: 5vw;
+        max-height: 15vw;
+        height: auto;
+        font-size: 2vw;
+    }
+
+    /* END */
+
+    .all-image{
+        text-align: center;
+        margin: 100px 15px 0 15px;
+        padding: 2%;  
+    }
+
+    .line-one, .line-two{
+        display: flex;
+        color: white;
+        text-align: center;
+        padding-left: 80px;
+    }
+
+    .line-two{
+        margin-top: 42px;
+        overflow: hidden;
+    }
+
+    img{
+        width: 420px;
+    }
+
+    .line-one .img-one, .img-two, .img-three{
+        color: black;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-align: initial;
+        font-size: 2vw;
+    }
+
+    .line-two .img-one, .img-two, .img-three{
+        color: black;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-align: initial;
+        font-size: 2vw;
+    }
+
+    /* HOVER: */
+    
+    
 
 </style>
