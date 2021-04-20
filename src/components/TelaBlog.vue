@@ -27,8 +27,71 @@
         </nav>
         <hr>
     </header>
+
+    <main class="main-home">
+        <div class="Titulo">
+            <h1>Criticas</h1>
+            <p>Aqui vc pode criticar a casa</p>
+        </div>
+    </main>
+
+    <!-- IMAGEM: Uma casa aleatória para a crítica -->
+
+    <header class="position-absolute start-50 translate-middle" id="bloco-image">
+        <div class="shadow p-3 mb-5 bg-body rounded">
+            <figure class="shadow mb-5">
+                <img src="../assets/Mediterranean-Villa.jpg">
+            </figure>
+            <div class="shadow p-3 mb-3 form-comentario">
+                <label for="emailInput" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="emailInput" placeholder="exemple@exemple.com" v-model="emailField">
+                
+                <br/>
+
+                <label for="comentarioInput" class="form-label">Comente aqui!</label>
+                <textarea class="form-control" id="comentarioInput" rows="3" v-model="comentarioField"></textarea>
+
+                <br/>
+
+                <button class="btn btn-primary spacing" @click="salvarDados">Enviar</button>
+
+                <a class="btn btn-primary spacing" role="button" @click="removeDado">Remove</a>
+            </div>
+
+            <div class="shadow p-3 mb-3 form-comentario" v-for="dado in dados" :key="dado">
+                <p>{{dado.email}}</p>
+                <br/>
+                <p>{{dado.comentario}}</p>
+
+                
+            </div>
+        </div>
+    </header>
+
 </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return{
+            emailField: "",
+            comentarioField: "",
+            dados: [
+
+            ]
+        }
+    },
+    methods: {
+        salvarDados: function(){
+            this.dados.push({email: this.emailField, comentario: this.comentarioField})
+        },
+        removeDado: function(){
+            this.dados.pop()
+        }
+    }
+}
+</script>
 
 <style scoped>
     *{
@@ -98,4 +161,59 @@
     hr{
         color: rgb(189, 189, 189);
     }
+
+    /* Main: Tela principal */
+
+
+    .main-home{
+        background-color: black;
+        height: 40vw;
+    }
+
+    /* Titulo do main */
+    .Titulo{
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        margin: 0 0 0 3vw;
+        padding: 5vw;
+    }
+
+    .Titulo h1{
+        margin: 15px;
+        padding: auto;
+    }
+
+    .Titulo p{
+        margin: 2px 5px 0 5px;
+        padding: 3px;
+        max-width: 100vw;
+        min-width: 25;
+        width: 50vw;
+        min-height: 5vw;
+        max-height: 15vw;
+        height: auto;
+        font-size: 2vw;
+    }
+
+    /* END */
+
+    #bloco-image{
+        top: 65vw;
+    }
+
+    /* formulario comentario */
+
+    .form-comentario label, .form-comentario input{
+        display: flex;
+    }
+
+    .form-comentario{
+        text-align: center;
+    }
+
+    .spacing{
+        margin: 2px;
+        padding: 2px;
+    }
+
 </style>

@@ -39,7 +39,7 @@
             <!-- Linha de imagens 1 -->
             <div class="line-one">
                 <div class="img-one">
-                    <img src="../assets/Mediterranean-Villa.jpg" alt="White and grey concrete building near swimming pool">
+                    <img src="../assets/Mediterranean-Villa.jpg">
                     <h3>Mediterranean Villa</h3>
                 </div>
                 <div class="img-two">
