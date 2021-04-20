@@ -1,27 +1,31 @@
 <template>
-  <div class="hello">
+<div class="hello">
     <!-- Menu do Blog -->
     <header class="menu-blog">
         <nav class="link-menu-global">
             <div class="icon-home">
-                <router-link to="/" class="btn btn-default">Blog</router-link>
+                <router-link to="/" class="btn-default">Home</router-link>
             </div>
             <div class="links-routers">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <router-link to="/">Home</router-link>
                     </li>
-                    <hr>
+                    |
                     <li class="nav-item">
-                        <router-link to="/">Produtos</router-link>
+                        <router-link to="/Blog">Blog</router-link>
                     </li>
-                    <hr>
+                    |
                     <li class="nav-item">
                         <router-link to="/">Contato</router-link>
                     </li>
-                </ul>  
+                    
+                </ul>
+                  
             </div>
+            
         </nav>
+        <hr>
     </header>
 
     <!-- Proximo: Fundo preto e imagens -->
@@ -32,45 +36,40 @@
             <p>este blog desenvolvido com intuito de ajudar a melhorar minhas experiências em Vue</p>
         </div>
         <nav class="all-image">
-            <ul>
-                <!-- Linha de imagens 1 -->
-                <li class="line-one">
-                    <div class="img-one">
-                        <img src="../assets/Mediterranean-Villa.jpg">
-                        <h3>Mediterranean Villa</h3>
-                    </div>
-                    <div class="img-two">
-                        <img src="../assets/modern-building.jpg">
-                        <h3>Modern Building</h3>
-                    </div>
-                    <div class="img-three">
-                        <img src="../assets/red-house.jpg">
-                        <h3>Red House</h3>
-                    </div>
-                </li>
+            <!-- Linha de imagens 1 -->
+            <div class="line-one">
+                <div class="img-one">
+                    <img src="../assets/Mediterranean-Villa.jpg" alt="White and grey concrete building near swimming pool">
+                    <h3>Mediterranean Villa</h3>
+                </div>
+                <div class="img-two">
+                    <img src="../assets/modern-building.jpg">
+                    <h3>Modern Building</h3>
+                </div>
+                <div class="img-three">
+                    <img src="../assets/red-house.jpg">
+                    <h3>Red House</h3>
+                </div>
+            </div>
 
                 <!-- Linha de imagens 2 -->
-                <li class="line-two">
-                    <div class="img-one">
-                        <img src="../assets/modern-house.jpg">
-                        <h3>Modern House</h3>
-                    </div>
-                    <div class="img-two">
-                        <img src="../assets/white-house.jpg">
-                        <h3>White House</h3>
-                    </div>
-                    <div class="img-three">
-                        <img src="../assets/art-center.jpg">
-                        <h3>Art Center</h3>
-                    </div>
-                </li>
-                
-            </ul>
+            <div class="line-two">
+                <div class="img-one">
+                    <img src="../assets/modern-house.jpg">
+                    <h3>Modern House</h3>
+                </div>
+                <div class="img-two">
+                    <img src="../assets/white-house.jpg">
+                    <h3>White House</h3>
+                </div>
+                <div class="img-three">
+                    <img src="../assets/art-center.jpg">
+                    <h3>Art Center</h3>
+                </div>
+            </div>
         </nav>
     </main>
-    
-    
-  </div>
+</div>
 </template>
 
 <script>
@@ -93,6 +92,8 @@ export default {
     }
 
     .menu-blog{
+        position: fixed;
+        z-index: 1;
         background-color: black;
     }
     
@@ -224,6 +225,29 @@ export default {
 
     /* HOVER: */
 
+    /* imagem 1 2 e 3 */
+
+    .img-one, .img-two, .img-three{
+        overflow: hidden;
+    }
+
+    .img-one img, .img-two img, .img-three img{
+        position: relative;
+        max-width: 100%;
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+    }
     
+    .img-one:hover img, .img-two:hover img, .img-three:hover img{
+        -moz-transform: scale(1.03);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.03);
+    }
+
+    /* SHEDOW */
+    .img-one img, .img-two img, .img-three img{
+        box-shadow: 0 2px 5px rgb(100, 100, 100);
+    }
 
 </style>

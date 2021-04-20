@@ -1,18 +1,17 @@
 <template>
   <div class="home">
-    <TelaHome/>
+    <TelaBlog/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import TelaHome from '@/components/TelaHome.vue'
+import TelaBlog from '@/components/TelaBlog.vue'
 
 export default {
-  name: 'Home',
+  name: 'Blog',
   components: {
-    TelaHome
+    TelaBlog
   }
 }
 </script>
-
