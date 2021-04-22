@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data() {
         return{
@@ -64,6 +65,11 @@ export default {
             var novoArray = this.dados.filter(dado => dado.id != i)
             this.dados = novoArray
         }
+    },
+    created: function(){
+        axios.get("https://localhost:5001/comentario").then(res => {
+            console.log(res)
+        })
     }
 }
 </script>
