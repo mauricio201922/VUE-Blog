@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <TelaBlog/>
+    
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import TelaBlog from '@/components/TelaBlog.vue'
+//import TelaBlog from '@/components/TelaBlog.vue'
 
 export default {
   name: 'Blog',
-  components: {
+  /*components: {
     TelaBlog
-  }
+  }*/
 }
 </script>

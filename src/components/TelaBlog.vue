@@ -1,33 +1,5 @@
 <template>
 <div class="hello">
-    <!-- Menu do Blog -->
-    <header class="menu-blog">
-        <nav class="link-menu-global">
-            <div class="icon-home">
-                <router-link to="/" class="btn-default">Home</router-link>
-            </div>
-            <div class="links-routers">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <router-link to="/">Home</router-link>
-                    </li>
-                    |
-                    <li class="nav-item">
-                        <router-link to="/Blog">Blog</router-link>
-                    </li>
-                    |
-                    <li class="nav-item">
-                        <router-link to="/">Contato</router-link>
-                    </li>
-                    
-                </ul>
-                  
-            </div>
-            
-        </nav>
-        <hr>
-    </header>
-
     <main class="main-home">
         <div class="Titulo">
             <h1>Criticas</h1>
@@ -53,18 +25,17 @@
 
                 <br/>
 
-                <button class="btn btn-primary spacing" @click="salvarDados">Enviar</button>
+                <button class="btn btn-primary spacing" @click="salvarDados()">Enviar</button><br/>
 
-                <a class="btn btn-primary spacing" role="button" @click="removeDado">Remove</a>
+                <div class="shadow p-3 mb-3 form-comentario" v-for="dado in dados" :key="dado">
+                    <p>{{dado.email}}</p>
+                    <br/>
+                    <p>{{dado.comentario}}</p>
+                    <a class="btn-error spacing" role="button" @click="removeDado(dado.id)">Remove</a>
+                </div>
             </div>
 
-            <div class="shadow p-3 mb-3 form-comentario" v-for="dado in dados" :key="dado">
-                <p>{{dado.email}}</p>
-                <br/>
-                <p>{{dado.comentario}}</p>
-
-                
-            </div>
+            
         </div>
     </header>
 
@@ -84,10 +55,14 @@ export default {
     },
     methods: {
         salvarDados: function(){
-            this.dados.push({email: this.emailField, comentario: this.comentarioField})
+            
+            this.dados.push({id: Date.now(), email: this.emailField, comentario: this.comentarioField})
+            this.emailField = ""
+            this.comentarioField = ""
         },
-        removeDado: function(){
-            this.dados.pop()
+        removeDado: function(i){
+            var novoArray = this.dados.filter(dado => dado.id != i)
+            this.dados = novoArray
         }
     }
 }
