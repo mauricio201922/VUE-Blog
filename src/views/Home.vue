@@ -28,8 +28,8 @@
         
     </header>
     
-    <TelaHome v-if="this.telas == 1"/>
-    <TelaBlog v-else-if="this.telas == 2"/>
+    <TelaHome v-if="telas == 1"/>
+    <TelaBlog v-else-if="telas == 2"/>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
   name: 'Home',
   data() {
       return {
-          telas: 1
+        telas: 1
       }
   },
 

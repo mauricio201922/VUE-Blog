@@ -16,7 +16,7 @@
             </figure>
             <div class="shadow p-3 mb-3 form-comentario">
                 <label for="emailInput" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="emailInput" placeholder="exemple@exemple.com" v-model="emailField">
+                <input type="text" class="form-control" id="emailInput" placeholder="exemple@exemple.com" v-model="nomeField">
                 
                 <br/>
 
@@ -25,13 +25,15 @@
 
                 <br/>
 
-                <button class="btn btn-primary spacing" @click="salvarDados()">Enviar</button><br/>
+                <button class="btn btn-primary spacing" @click="salvarDados">Enviar</button><br/>
 
                 <div class="shadow p-3 mb-3 form-comentario" v-for="dado in dados" :key="dado">
-                    <p>{{dado.email}}</p>
+                    <p>{{dado.id}}</p>
                     <br/>
-                    <p>{{dado.comentario}}</p>
-                    <a class="btn-error spacing" role="button" @click="removeDado(dado.id)">Remove</a>
+                    <p>{{dado.nome}}</p>
+                    <br/>
+                    <p>{{dado.comenta}}</p>
+                    <a class="colorindo" role="button" @click="removeDado(dado.id)">Remove</a>
                 </div>
             </div>
 
@@ -45,32 +47,63 @@
 <script>
 import axios from 'axios'
 export default {
+    created: function(){
+        /*axios.get("https://localhost:44302/Home/RetornaComentarios").then(res => {
+            alert(res)
+        })*/
+        axios({
+            method: 'get', //you can set what request you want to be
+            url: 'https://localhost:5001/Home/RetornaComentarios',
+        }).then(res => {
+            res.data.forEach(element => {
+                this.dados.push(element)
+            });
+        }).catch(err => {
+            alert(err)
+        })
+    },
     data() {
         return{
-            emailField: "",
+            nomeField: "",
             comentarioField: "",
-            dados: [
-
-            ]
+            dados: []
         }
     },
     methods: {
         salvarDados: function(){
-            
-            this.dados.push({id: Date.now(), email: this.emailField, comentario: this.comentarioField})
-            this.emailField = ""
+
+            /* Salvando no Banco */
+            axios({
+                method: 'post',
+                url: 'https://localhost:5001/Home/Salvar?' + this.nomeField + '&' + this.comentarioField,
+            }).then(res => {
+                console.log(res)
+            }).catch(err => {
+                alert(err)
+            })
+
+            this.nomeField = ""
             this.comentarioField = ""
+
+            
         },
         removeDado: function(i){
             var novoArray = this.dados.filter(dado => dado.id != i)
             this.dados = novoArray
+
+            /* DELETA DO BANCO E DO COMENTARIO */
+            axios({
+                method: 'post',
+                url: 'https://localhost:5001/Home/DeletarComentario/' + i,
+            }).then(res => {
+                
+                console.log(res)
+            }).catch(err => {
+                alert(err)
+            })
         }
-    },
-    created: function(){
-        axios.get("https://localhost:5001/comentario").then(res => {
-            console.log(res)
-        })
     }
+    
 }
 </script>
 
@@ -78,10 +111,6 @@ export default {
     *{
         margin: 0;
         padding: 0;
-    }
-
-    .hello{
-        background-color: rgb(172, 172, 172);
     }
 
     .menu-blog{
@@ -193,8 +222,13 @@ export default {
     }
 
     .spacing{
-        margin: 2px;
+        margin: 0 0 15px 0;
         padding: 2px;
+    }
+
+    .colorindo{
+        color: red;
+        text-decoration: none;
     }
 
 </style>
