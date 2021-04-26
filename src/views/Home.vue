@@ -17,7 +17,7 @@
                     </li>
                     |
                     <li class="nav-item">
-                        <router-link to="/">Contato</router-link>
+                        <a href="#contato">Contato</a>
                     </li>
                     
                 </ul>

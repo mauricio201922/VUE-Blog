@@ -42,26 +42,76 @@
                 </div>
             </div>
         </nav>
+
+        <header class="bg-dark text-center" id="contato">
+            <h1 class="text-light">Contato</h1> <br/>
+
+            <div class="d-flex justify-content-center text-white pad">
+                <div class="d-grid flex-column spacing-input">
+                    
+                    <div class="p-1 bd-highlight form-floating col-auto">
+                        <input required type="text" name="nome" class="w-100 form-control" id="floatingInputValue" v-model="nomeContato">
+                        <label for="floatingInputValue">Nome: </label>
+                    </div>
+
+                    <div class="p-1 bd-highlight form-floating col-auto">
+                        <input required type="email" name="email" class="form-control" id="floatingInputValue" placeholder="exemplo@exemplo.com" v-model="emailContato">
+                        <label for="floatingInputValue">Email: </label>
+                    </div>
+
+                    <div class="p-1 bd-highlight form-floating col-auto">
+                        <input required type="text" name="tel" class="form-control" id="floatingInputValue" placeholder="(xx) xxxxx-xxxx" v-model="telContato">
+                        <label for="floatingInputValue">Telefone/Celular: </label>
+                    </div>
+
+                </div>
+
+                <div class="p-2 bd-highlight form-floating">
+                    <textarea required placeholder="Digite sua mensagem!" rows="8" cols="50" v-model="msgContato"></textarea>
+                </div>
+
+                
+
+            </div>
+
+            <div>
+                <button class="btn btn-primary" @click="enviarContato">Eviar</button>
+            </div>
+
+            <hr>
+
+            <div class="text-center">
+                <span class="text-muted">© 2021 - 2021  |  Blog - Blog do Maurício.</span>
+            </div>
+        </header>
     </main>
+
+    
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
       return{
-        telas: 1
+          nomeContato: "",
+          emailContato: "",
+          telContato: "",
+          msgContato: ""
       }
   },
 
-  props: {
-
-  },
-
   methods: {
-      trocando: function(value){
-          console.log("foi")
-          this.telas = value
+      enviarContato: function(){
+          axios({
+              method: 'get',
+              url: 'https://localhost:5001/Contato/EnviarContato?nome=' + this.nomeContato + '&email=' + this.emailContato + '&telefone=' + this.telContato + '&mensagem=' + this.msgContato
+          }).then(res => {
+              console.log(res)
+          }).catch(err => {
+              alert(err)
+          })
       }
   }
   
@@ -164,6 +214,26 @@ export default {
     /* SHEDOW */
     .img-one img, .img-two img, .img-three img{
         box-shadow: 0 2px 5px rgb(100, 100, 100);
+    }
+
+    input {
+        min-width: 400px;
+    }
+
+    .spacing-input{
+        padding: 12px;
+    }
+
+    .spacing-input input{
+        margin: 2px 8px 2px 2px;
+    }
+
+    .pad{
+        padding: 8px 0 8px 0;
+    }
+
+    label {
+        color: black;
     }
 
 </style>

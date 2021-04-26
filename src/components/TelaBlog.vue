@@ -40,6 +40,7 @@
             
         </div>
     </header>
+    
 
 </div>
 </template>
@@ -216,7 +217,7 @@ export default {
     /* END */
 
     #bloco-image{
-        top: 65vw;
+        top: 80vw;
     }
 
     /* formulario comentario */
