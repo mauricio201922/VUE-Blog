@@ -15,8 +15,8 @@
                 <img src="../assets/Mediterranean-Villa.jpg">
             </figure>
             <div class="shadow p-3 mb-3 form-comentario">
-                <label for="emailInput" class="form-label">Email address</label>
-                <input type="text" class="form-control" id="emailInput" placeholder="exemple@exemple.com" v-model="nomeField">
+                <label for="nomeInput" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nomeInput" v-model="nomeField">
                 
                 <br/>
 
@@ -47,6 +47,8 @@
 <script>
 import axios from 'axios'
 export default {
+
+    // Função que toda hora que o site da TelaBlog inicia, entra aqui
     created: function(){
         /*axios.get("https://localhost:44302/Home/RetornaComentarios").then(res => {
             alert(res)
@@ -62,6 +64,7 @@ export default {
             alert(err)
         })
     },
+
     data() {
         return{
             nomeField: "",
@@ -69,13 +72,16 @@ export default {
             dados: []
         }
     },
+
     methods: {
+
+        // Methodo que salva dados no banco
         salvarDados: function(){
 
             /* Salvando no Banco */
             axios({
                 method: 'post',
-                url: 'https://localhost:5001/Home/Salvar?' + this.nomeField + '&' + this.comentarioField,
+                url: 'https://localhost:5001/Home/Salvar?nome=' + this.nomeField + '&comentario=' + this.comentarioField,
             }).then(res => {
                 console.log(res)
             }).catch(err => {
@@ -84,9 +90,10 @@ export default {
 
             this.nomeField = ""
             this.comentarioField = ""
-
             
         },
+
+        // Methodo que remove dados do Banco
         removeDado: function(i){
             var novoArray = this.dados.filter(dado => dado.id != i)
             this.dados = novoArray
@@ -102,6 +109,7 @@ export default {
                 alert(err)
             })
         }
+
     }
     
 }
