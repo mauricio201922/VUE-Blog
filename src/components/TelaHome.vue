@@ -105,7 +105,7 @@ export default {
   methods: {
       enviarContato: function(){
           axios({
-              method: 'get',
+              method: 'post',
               url: 'https://localhost:5001/Contato/EnviarContato?nome=' + this.nomeContato + '&email=' + this.emailContato + '&telefone=' + this.telContato + '&mensagem=' + this.msgContato
           }).then(res => {
               console.log(res)
