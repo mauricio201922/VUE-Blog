@@ -75,7 +75,9 @@
             </div>
 
             <div>
-                <button class="btn btn-primary" @click="enviarContato">Eviar</button>
+                <button @click="enviarContato" class="btn btn-primary">
+                    <div v-if="loading" class="spinner-border spinner-border-sm"></div> Eviar
+                </button>
             </div>
 
             <hr>
@@ -84,6 +86,7 @@
                 <span class="text-muted">© 2021 - 2021  |  Blog - Blog do Maurício.</span>
             </div>
         </header>
+        <div>{{ $store.getters.testar }}</div>
     </main>
 
     
@@ -91,27 +94,33 @@
 </template>
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 export default {
   data() {
       return{
+          // Valores de contatos
           nomeContato: "",
           emailContato: "",
           telContato: "",
-          msgContato: ""
+          msgContato: "",
+
+          // carregando os dados
+          loading: false,
       }
   },
 
   methods: {
-      enviarContato: function(){
-          axios({
-              method: 'get',
-              url: 'https://localhost:5001/Contato/EnviarContato?nome=' + this.nomeContato + '&email=' + this.emailContato + '&telefone=' + this.telContato + '&mensagem=' + this.msgContato
-          }).then(res => {
-              console.log(res)
-          }).catch(err => {
-              alert(err)
-          })
+      enviarContato(){
+          try {
+              this.loading = true
+              setTimeout(() => {
+                  this.$store.dispatch('SalvandoContato', {nome: this.nomeContato, email: this.emailContato, telefone: this.telContato, mensagem: this.msgContato})
+                  this.loading = false
+              }, 1000)
+          } finally {
+              this.teste = this.$store.state.isLoading
+          }
+          
       }
   }
   
