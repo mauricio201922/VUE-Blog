@@ -120,7 +120,6 @@ export default {
           } finally {
               this.teste = this.$store.state.isLoading
           }
-          
       }
   }
   
