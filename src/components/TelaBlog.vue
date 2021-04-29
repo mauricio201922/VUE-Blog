@@ -25,18 +25,23 @@
 
                 <br/>
 
-                <button class="btn btn-primary spacing" @click="salvarDados">Enviar</button><br/>
+                <button class="btn btn-primary spacing" @click="salvarDados">Enviar</button>
+                <button class="btn btn-primary spacing" @click="GetComentarios">
+                    <span v-if="isMostrar">Mostrar</span>
+                    <span v-else-if="!isMostrar">Ocultar</span>
+                </button>
 
-                <div class="shadow p-3 mb-3 form-comentario" v-for="dado in dados" :key="dado">
-                    <p>{{dado.id}}</p>
-                    <br/>
-                    <p>{{dado.nome}}</p>
-                    <br/>
-                    <p>{{dado.comenta}}</p>
-                    <a class="colorindo" role="button" @click="removeDado(dado.id)">Remove</a>
+                <div v-if="!this.isMostrar">
+                    <div class="shadow p-3 mb-3 form-comentario" v-for="dado in getComent" :key="dado">
+                        <p>{{dado.id}}</p>
+                        <br/>
+                        <p>{{dado.nome}}</p>
+                        <br/>
+                        <p>{{dado.comenta}}</p>
+                        <a class="colorindo" role="button" @click="removeDado(dado.id)">Remove</a>
+                    </div>
                 </div>
             </div>
-
             
         </div>
     </header>
@@ -49,28 +54,23 @@
 import axios from 'axios'
 export default {
 
-    // Função que toda hora que o site da TelaBlog inicia, entra aqui
     created: function(){
-        /*axios.get("https://localhost:44302/Home/RetornaComentarios").then(res => {
-            alert(res)
-        })*/
-        axios({
-            method: 'get', //you can set what request you want to be
-            url: 'https://localhost:5001/Home/RetornaComentarios',
-        }).then(res => {
-            res.data.forEach(element => {
-                this.dados.push(element)
-            });
-        }).catch(err => {
-            alert(err)
-        })
+        this.isMostrar = true
     },
 
     data() {
         return{
-            nomeField: "",
-            comentarioField: "",
-            dados: []
+            form: {
+                nomeField: "",
+                comentarioField: ""
+            },
+            isMostrar: true
+        }
+    },
+
+    computed: {
+        getComent(){
+            return this.$store.getters.getCom
         }
     },
 
@@ -109,6 +109,15 @@ export default {
             }).catch(err => {
                 alert(err)
             })
+        },
+
+        // mostrar comentarios
+        GetComentarios: function(){
+            if(this.$store.state.getComentario == 0){
+                this.$store.dispatch('getComentario')
+            }
+            
+            this.isMostrar = !this.isMostrar
         }
 
     }
@@ -200,6 +209,7 @@ export default {
     .Titulo h1{
         margin: 15px;
         padding: auto;
+        font-size: 3vw;
     }
 
     .Titulo p{
@@ -217,7 +227,7 @@ export default {
     /* END */
 
     #bloco-image{
-        top: 80vw;
+        top: 65vw;
     }
 
     /* formulario comentario */
@@ -231,7 +241,7 @@ export default {
     }
 
     .spacing{
-        margin: 0 0 15px 0;
+        margin: 0 5px 15px 5px;
         padding: 2px;
     }
 

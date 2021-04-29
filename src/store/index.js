@@ -6,17 +6,19 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-      contato: []
+      contato: [],
+      getComentario: []
   },
   mutations: {
-      setIndex(state, payload){
-        state.i = payload
-      },
       setContato(state, payload){
           state.contato.push(payload)
       },
+      setComentarioGet(state, payload){
+          state.getComentario.push(payload)
+      }
   },
   actions: {
+      // Contato
       SalvandoContato({ commit }, value){
         commit('setContato', value)
         axios({
@@ -34,11 +36,28 @@ const store = new Vuex.Store({
         }).catch(err => {
             alert(err)
         })
+      },
+
+      // /comentario GET
+      getComentario({ commit }){
+        axios({
+            method: 'get', //you can set what request you want to be
+            url: 'https://localhost:5001/Home/RetornaComentarios',
+        }).then(res => {
+            res.data.forEach(element => {
+                commit('setComentarioGet', element)
+            });
+        }).catch(err => {
+            alert(err)
+        })
       }
   },
   modules: {
   },
   getters: {
+      getCom(state){
+          return state.getComentario
+      }
   }
 })
 
